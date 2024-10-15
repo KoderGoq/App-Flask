@@ -1,0 +1,6 @@
+Flask
+Flask-RESTful
+joblib
+numpy
+scikit-learn
+gunicorn

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Predicción de Enfermedad del Corazón</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      margin-top: 50px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 class="text-center">Predicción de Enfermedad del Corazón</h2>
+    <form action="/predict" method="POST">
+      <div class="form-group">
+        <label for="age">Edad:</label>
+        <input type="number" step="any" class="form-control" name="age" required>
+      </div>
+      <div class="form-group">
+        <label for="sex">Sexo (0 = Femenino, 1 = Masculino):</label>
+        <input type="number" step="any" class="form-control" name="sex" required>
+      </div>
+      <div class="form-group">
+        <label for="cp">Tipo de Dolor en el Pecho:</label>
+        <select class="form-control" name="cp" required>
+          <option value="0">Dolor no anginoso</option>
+          <option value="1">Angina típica</option>
+          <option value="2">Angina atípica</option>
+          <option value="3">Dolor no anginoso</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="trestbps">Presión Arterial en Reposo (mm Hg):</label>
+        <input type="number" step="any" class="form-control" name="trestbps" required>
+      </div>
+      <div class="form-group">
+        <label for="chol">Colesterol en mg/dl:</label>
+        <input type="number" step="any" class="form-control" name="chol" required>
+      </div>
+      <div class="form-group">
+        <label for="fbs">Azúcar en Sangre en Ayunas > 120 mg/dl (1 = Verdadero, 0 = Falso):</label>
+        <input type="number" step="any" class="form-control" name="fbs" required>
+      </div>
+      <div class="form-group">
+        <label for="restecg">Electrocardiograma en Reposo:</label>
+        <select class="form-control" name="restecg" required>
+          <option value="0">Normal</option>
+          <option value="1">Anomalía</option>
+          <option value="2">Enfermedad</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="thalach">Frecuencia Cardíaca Máxima:</label>
+        <input type="number" step="any" class="form-control" name="thalach" required>
+      </div>
+      <div class="form-group">
+        <label for="exang">Angina de Esfuerzo (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="exang" required>
+      </div>
+      <div class="form-group">
+        <label for="oldpeak">Depresión ST Inducida por Ejercicio:</label>
+        <input type="number" step="any" class="form-control" name="oldpeak" required>
+      </div>
+      <div class="form-group">
+        <label for="slope">Pendiente del Segmento ST (0, 1, 2):</label>
+        <input type="number" step="any" class="form-control" name="slope" required>
+      </div>
+      <div class="form-group">
+        <label for="ca">Número de Vasos Sanguíneos (0-3):</label>
+        <input type="number" step="any" class="form-control" name="ca" required>
+      </div>
+      <div class="form-group">
+        <label for="thal">Talasemia (1, 2, 3):</label>
+        <input type="number" step="any" class="form-control" name="thal" required>
+      </div>
+      <div class="form-group">
+        <label for="sex_male">Sexo Masculino (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="sex_male" required>
+      </div>
+      <div class="form-group">
+        <label for="cp_atypical">Dolor Anginoso Atípico (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="cp_atypical" required>
+      </div>
+      <div class="form-group">
+        <label for="cp_non_anginal">Dolor No Anginoso (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="cp_non_anginal" required>
+      </div>
+      <div class="form-group">
+        <label for="cp_typical">Dolor Anginoso Típico (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="cp_typical" required>
+      </div>
+      <div class="form-group">
+        <label for="fbs_1">FBS > 120 (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="fbs_1" required>
+      </div>
+      <div class="form-group">
+        <label for="restecg_1">Electrocardiograma Tipo 1 (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="restecg_1" required>
+      </div>
+      <div class="form-group">
+        <label for="restecg_2">Electrocardiograma Tipo 2 (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="restecg_2" required>
+      </div>
+      <div class="form-group">
+        <label for="exang_1">Exangina (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="exang_1" required>
+      </div>
+      <div class="form-group">
+        <label for="slope_2">Pendiente Tipo 2 (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="slope_2" required>
+      </div>
+      <div class="form-group">
+        <label for="slope_3">Pendiente Tipo 3 (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="slope_3" required>
+      </div>
+      <div class="form-group">
+        <label for="ca_0">CA = 0 (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="ca_0" required>
+      </div>
+      <div class="form-group">
+        <label for="ca_1">CA = 1 (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="ca_1" required>
+      </div>
+      <div class="form-group">
+        <label for="ca_2">CA = 2 (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="ca_2" required>
+      </div>
+      <div class="form-group">
+        <label for="ca_3">CA = 3 (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="ca_3" required>
+      </div>
+      <div class="form-group">
+        <label for="thal_4">Thal = 4 (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="thal_4" required>
+      </div>
+      <div class="form-group">
+        <label for="thal_6">Thal = 6 (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="thal_6" required>
+      </div>
+      <div class="form-group">
+        <label for="thal_7">Thal = 7 (1 = Sí, 0 = No):</label>
+        <input type="number" step="any" class="form-control" name="thal_7" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Predecir</button>
+    </form>
+  </div>
+</body>
+
+</html>
